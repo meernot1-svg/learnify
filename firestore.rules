@@ -1,0 +1,70 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 0. Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Connection test document
+    match /test/connection {
+      allow get: if true;
+    }
+
+    // Primitives
+    function isSignedIn() { return request.auth != null; }
+    function isEmailVerified() { return isSignedIn(); }
+    function isValidId(id) { return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); }
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+    function isAdmin() { 
+      return isSignedIn() && (request.auth.token.email == 'meernot1@gmail.com' || request.auth.token.email == 'safiullahbhangar1@gmail.com');
+    }
+
+    // Role-based helper
+    function isMentor() {
+      return isSignedIn() && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'Mentor';
+    }
+
+    // 1. Users
+    match /users/{userId} {
+      function isValidUser(data) {
+        return data.keys().hasAll(['uid', 'email', 'role', 'username', 'fullName']) &&
+               data.uid == userId &&
+               data.role in ['Student', 'Mentor'];
+      }
+      allow read: if isSignedIn();
+      allow create: if isSignedIn() && isValidId(userId) && userId == request.auth.uid && isValidUser(incoming());
+      allow update: if isSignedIn() && (userId == request.auth.uid || isMentor() || isAdmin());
+    }
+
+    // Legacy collections
+    match /materials/{id} { 
+      allow read: if isSignedIn(); 
+      allow create: if isMentor() || isAdmin();
+      allow update, delete: if isSignedIn() && (resource.data.mentorId == request.auth.uid || isAdmin());
+    }
+    match /courses/{id} { 
+      allow read: if isSignedIn(); 
+      allow create: if isMentor() || isAdmin();
+      allow update, delete: if isSignedIn() && (resource.data.mentorId == request.auth.uid || isAdmin());
+    }
+    match /progress/{id} {
+      allow read: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create, update: if isSignedIn() && incoming().userId == request.auth.uid;
+    }
+    match /reminders/{id} {
+      function isValidReminder(data) {
+        return data.keys().hasAll(['userId', 'subject', 'topic', 'time', 'isNotified', 'createdAt']) &&
+               data.userId == request.auth.uid &&
+               data.subject is string && data.subject.size() <= 100 &&
+               data.topic is string && data.topic.size() <= 200 &&
+               data.isNotified is bool;
+      }
+      allow read: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create: if isSignedIn() && isValidReminder(incoming()) && isValidId(id);
+      allow update: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin()) && isValidReminder(incoming());
+      allow delete: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin());
+    }
+  }
+}

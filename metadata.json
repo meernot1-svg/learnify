@@ -1,0 +1,13 @@
+{
+  "name": "Learnify",
+  "description": "Smart Virtual Labs & AI Learning Platform",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "AI-powered learning",
+    "Virtual labs",
+    "Peer-to-peer mentoring"
+  ]
+}

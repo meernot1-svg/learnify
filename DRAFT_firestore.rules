@@ -1,0 +1,104 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 0. Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper Functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isEmailVerified() {
+      return isSignedIn() && request.auth.token.email_verified == true;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function getExistingData() {
+      return resource.data;
+    }
+
+    function getIncomingData() {
+      return request.resource.data;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isMentor() {
+      return isSignedIn() && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'Mentor';
+    }
+
+    // 1. Users
+    match /users/{userId} {
+      function isValidUser(data) {
+        return data.keys().hasAll(['uid', 'email', 'role']) &&
+               data.uid == request.auth.uid &&
+               data.email is string && data.email.size() <= 256 &&
+               data.role in ['Mentor', 'Student'] &&
+               (!data.keys().contains('achievements') || data.achievements is list);
+      }
+
+      allow get: if isSignedIn();
+      allow list: if isSignedIn() && resource.data.uid == request.auth.uid; // Secure list query
+      allow create: if isEmailVerified() && isValidUser(getIncomingData());
+      allow update: if isEmailVerified() && isOwner(userId) && 
+                      getIncomingData().diff(getExistingData()).affectedKeys().hasOnly(['displayName', 'achievements']) &&
+                      getIncomingData().role == getExistingData().role;
+    }
+
+    // 2. Materials
+    match /materials/{materialId} {
+      function isValidMaterial(data) {
+        return data.keys().hasAll(['title', 'subject', 'type', 'url', 'mentorId']) &&
+               data.title is string && data.title.size() <= 200 &&
+               data.subject in ['computer', 'physics', 'biology', 'chemistry'] &&
+               data.type in ['video', 'book'] &&
+               data.url is string && data.url.size() <= 1000 &&
+               data.mentorId == request.auth.uid;
+      }
+
+      allow read: if isSignedIn();
+      allow create: if isEmailVerified() && isMentor() && isValidMaterial(getIncomingData());
+      allow update: if isEmailVerified() && isMentor() && getExistingData().mentorId == request.auth.uid && 
+                      isValidMaterial(getIncomingData()) &&
+                      getIncomingData().diff(getExistingData()).affectedKeys().hasOnly(['title', 'description', 'url', 'subject', 'type']);
+      allow delete: if isEmailVerified() && isMentor() && getExistingData().mentorId == request.auth.uid;
+    }
+
+    // 3. Courses
+    match /courses/{courseId} {
+      function isValidCourse(data) {
+        return data.keys().hasAll(['title', 'subject', 'mentorId']) &&
+               data.title is string && data.title.size() <= 200 &&
+               data.mentorId == request.auth.uid;
+      }
+
+      allow read: if isSignedIn();
+      allow create: if isEmailVerified() && isMentor() && isValidCourse(getIncomingData());
+      allow update: if isEmailVerified() && isMentor() && getExistingData().mentorId == request.auth.uid &&
+                      isValidCourse(getIncomingData()) &&
+                      getIncomingData().diff(getExistingData()).affectedKeys().hasOnly(['title', 'description', 'materialIds']);
+      allow delete: if isEmailVerified() && isMentor() && getExistingData().mentorId == request.auth.uid;
+    }
+
+    // 4. Progress
+    match /progress/{progressId} {
+      function isValidProgress(data) {
+        return data.keys().hasAll(['userId', 'materialId', 'status']) &&
+               data.userId == request.auth.uid &&
+               data.status == 'completed';
+      }
+
+      allow read: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isEmailVerified() && isValidProgress(getIncomingData());
+      allow update: if isEmailVerified() && getExistingData().userId == request.auth.uid && isValidProgress(getIncomingData());
+    }
+  }
+}

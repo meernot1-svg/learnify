@@ -1,0 +1,169 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile information and role.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "username": { "type": "string" },
+        "fullName": { "type": "string" },
+        "fatherName": { "type": "string" },
+        "phone": { "type": "string" },
+        "address": { "type": "string" },
+        "role": { "type": "string", "enum": ["Mentor", "Student"] },
+        "achievements": { "type": "array", "items": { "type": "string" } },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role", "username", "fullName"]
+    },
+    "Group": {
+      "title": "Group",
+      "description": "A group for competition.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "members": { "type": "array", "items": { "type": "string" } },
+        "memberEmails": { "type": "array", "items": { "type": "string" } },
+        "createdBy": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "settings": {
+          "type": "object",
+          "properties": {
+            "timeLimit": { "type": "integer" },
+            "scoringRules": { "type": "string", "enum": ["standard", "aggressive", "survival"] },
+            "allowResources": { "type": "boolean" },
+            "difficultyMultiplier": { "type": "number" }
+          }
+        }
+      },
+      "required": ["title", "members", "createdBy"]
+    },
+    "Competition": {
+      "title": "Competition",
+      "description": "An active competition session.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "groupId": { "type": "string" },
+        "title": { "type": "string" },
+        "type": { "type": "string", "enum": ["pdf", "topic"] },
+        "mcqs": { "type": "array", "items": { "type": "object" } },
+        "status": { "type": "string", "enum": ["active", "completed"] },
+        "results": { "type": "object" },
+        "createdBy": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["groupId", "type", "status", "createdBy"]
+    },
+    "Message": {
+      "title": "Message",
+      "description": "Chat message in a group.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "groupId": { "type": "string" },
+        "senderId": { "type": "string" },
+        "senderName": { "type": "string" },
+        "text": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["groupId", "senderId", "text"]
+    },
+    "Material": {
+      "title": "Material",
+      "description": "Educational material like books (PDFs) or videos.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "subject": { "type": "string", "enum": ["computer", "physics", "biology", "chemistry"] },
+        "type": { "type": "string", "enum": ["video", "book", "pdf"] },
+        "url": { "type": "string" },
+        "mentorId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "subject", "type", "url", "mentorId"]
+    },
+    "Course": {
+      "title": "Course",
+      "description": "A structured course consisting of multiple materials.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "subject": { "type": "string" },
+        "mentorId": { "type": "string" },
+        "materialIds": { "type": "array", "items": { "type": "string" } },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "subject", "mentorId"]
+    },
+    "Progress": {
+      "title": "Progress",
+      "description": "Student progress tracking for specific materials.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "materialId": { "type": "string" },
+        "status": { "type": "string", "enum": ["completed"] },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "materialId", "status"]
+    },
+    "StudyReminder": {
+      "title": "StudyReminder",
+      "description": "Student study reminders.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "subject": { "type": "string" },
+        "topic": { "type": "string" },
+        "time": { "type": "string", "format": "date-time" },
+        "isNotified": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "subject", "topic", "time"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Users and their roles."
+    },
+    "/materials/{materialId}": {
+      "schema": "Material",
+      "description": "All educational materials."
+    },
+    "/courses/{courseId}": {
+      "schema": "Course",
+      "description": "Courses created by mentors."
+    },
+    "/progress/{progressId}": {
+      "schema": "Progress",
+      "description": "Tracking student completion."
+    },
+    "/groups/{groupId}": {
+      "schema": "Group",
+      "description": "Competition groups."
+    },
+    "/competitions/{competitionId}": {
+      "schema": "Competition",
+      "description": "Active competitions."
+    },
+    "/messages/{messageId}": {
+      "schema": "Message",
+      "description": "Group chat messages."
+    },
+    "/reminders/{reminderId}": {
+      "schema": "StudyReminder",
+      "description": "User specific study reminders."
+    }
+  }
+}
