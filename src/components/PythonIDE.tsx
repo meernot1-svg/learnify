@@ -68,7 +68,7 @@ export default function PythonIDE() {
 
   return (
     <div className="flex flex-col lg:flex-row gap-6">
-      <div className="lg:w-80 space-y-4 h-[600px] overflow-y-auto pr-2 scrollbar-hide">
+      <div className="lg:w-80 space-y-4 h-[250px] lg:h-[600px] overflow-y-auto pr-2 scrollbar-hide">
         <div className="p-6 bg-card border border-border rounded-3xl mb-4">
            <h3 className="font-bold mb-1">Code Guides</h3>
            <p className="text-[10px] text-muted-foreground uppercase font-black tracking-widest">20 Programming Tasks</p>

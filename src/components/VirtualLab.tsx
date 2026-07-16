@@ -3009,7 +3009,7 @@ export default function VirtualLab({
                           </h3>
                         </div>
 
-                        <div className="grid grid-cols-3 gap-6 flex-1">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 flex-1">
                           {ANATOMY_MODELS.map((model) => (
                             <motion.button
                               key={model.id}
@@ -3041,22 +3041,22 @@ export default function VirtualLab({
                     ) : activeTool === "petri" ? (
                       <div className="w-full max-w-4xl bg-card/60 p-6 sm:p-12 rounded-3xl sm:rounded-[4rem] border border-white/5 backdrop-blur-2xl flex flex-col items-center gap-6 sm:gap-12">
                         <div className="relative">
-                          <div className="w-96 h-96 rounded-full border-[12px] border-slate-800 shadow-[20px_20px_60px_rgba(0,0,0,0.5),-20px_-20px_60px_rgba(255,255,255,0.05),inset_0_0_50px_rgba(0,0,0,0.5)] bg-emerald-500/5 relative overflow-hidden flex items-center justify-center">
+                          <div className="w-64 h-64 sm:w-96 sm:h-96 rounded-full border-[8px] sm:border-[12px] border-slate-800 shadow-[20px_20px_60px_rgba(0,0,0,0.5),-20px_-20px_60px_rgba(255,255,255,0.05),inset_0_0_50px_rgba(0,0,0,0.5)] bg-emerald-500/5 relative overflow-hidden flex items-center justify-center">
                             <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent skew-x-12" />
 
                             {/* Specimen visualization based on selected substance */}
                             {microscopeSlide === "onion" ? (
-                              <div className="w-64 h-64 bg-emerald-400/20 rounded-[2rem] border border-emerald-400/30 rotate-12 blur-sm animate-pulse" />
+                              <div className="w-48 h-48 sm:w-64 sm:h-64 bg-emerald-400/20 rounded-[1.5rem] sm:rounded-[2rem] border border-emerald-400/30 rotate-12 blur-sm animate-pulse" />
                             ) : microscopeSlide === "petri" ? (
-                              <div className="w-64 h-64 bg-emerald-500/20 rounded-full border border-emerald-500/30 blur-sm flex items-center justify-center animate-pulse">
-                                <div className="w-32 h-32 bg-emerald-400/30 rounded-full blur-md" />
+                              <div className="w-48 h-48 sm:w-64 sm:h-64 bg-emerald-500/20 rounded-full border border-emerald-500/30 blur-sm flex items-center justify-center animate-pulse">
+                                <div className="w-24 h-24 sm:w-32 sm:h-32 bg-emerald-400/30 rounded-full blur-md" />
                               </div>
                             ) : microscopeSlide === "none" ? (
-                              <p className="text-white/10 text-xs font-black uppercase tracking-widest text-center">
+                              <p className="text-white/10 text-[10px] sm:text-xs font-black uppercase tracking-widest text-center px-4">
                                 Place specimen for culturing
                               </p>
                             ) : (
-                              <div className="w-48 h-48 bg-red-400/20 rounded-full border border-red-400/30 blur-md animate-pulse" />
+                              <div className="w-36 h-36 sm:w-48 sm:h-48 bg-red-400/20 rounded-full border border-red-400/30 blur-md animate-pulse" />
                             )}
                           </div>
                           <div className="absolute -top-4 -right-4 w-20 h-20 rounded-full bg-slate-900 border-4 border-slate-800 flex items-center justify-center text-emerald-400 shadow-xl">
@@ -3094,8 +3094,8 @@ export default function VirtualLab({
                         </div>
                       </div>
                     ) : activeTool === "microscope" ? (
-                      <div className="relative">
-                        <div className="relative w-[520px] h-[520px] rounded-full border-[1.5rem] border-slate-900 shadow-[0_0_100px_rgba(0,0,0,0.8),inset_0_0_50px_rgba(0,0,0,0.5)] overflow-hidden bg-black">
+                      <div className="flex flex-col lg:flex-row items-center gap-8 relative w-full max-w-5xl justify-center">
+                        <div className="relative w-72 h-72 sm:w-96 sm:h-96 md:w-[520px] md:h-[520px] rounded-full border-[1rem] sm:border-[1.5rem] border-slate-900 shadow-[0_0_100px_rgba(0,0,0,0.8),inset_0_0_50px_rgba(0,0,0,0.5)] overflow-hidden bg-black shrink-0">
                           {microscopeSlide === "none" ? (
                             <div className="w-full h-full flex flex-col items-center justify-center text-emerald-500/20 gap-4">
                               <Search size={64} className="animate-pulse" />
@@ -3139,9 +3139,9 @@ export default function VirtualLab({
                           )}
 
                           {/* Peripheral Controls */}
-                          <div className="absolute bottom-10 inset-x-0 flex items-center justify-center gap-6 z-20">
-                            <div className="bg-black/80 backdrop-blur-md p-4 rounded-3xl border border-white/10 space-y-3 w-40">
-                              <p className="text-[8px] font-black text-emerald-400 uppercase tracking-widest text-center">
+                          <div className="absolute bottom-6 sm:bottom-10 inset-x-0 flex items-center justify-center gap-3 sm:gap-6 z-20 px-4">
+                            <div className="bg-black/80 backdrop-blur-md p-2 sm:p-4 rounded-2xl sm:rounded-3xl border border-white/10 space-y-1.5 sm:space-y-3 w-28 sm:w-40 shrink-0">
+                              <p className="text-[7px] sm:text-[8px] font-black text-emerald-400 uppercase tracking-widest text-center">
                                 Optical Zoom
                               </p>
                               <input
@@ -3156,8 +3156,8 @@ export default function VirtualLab({
                                 className="w-full h-1 appearance-none bg-emerald-950 rounded-full accent-emerald-400"
                               />
                             </div>
-                            <div className="bg-black/80 backdrop-blur-md p-4 rounded-3xl border border-white/10 space-y-3 w-40">
-                              <p className="text-[8px] font-black text-emerald-400 uppercase tracking-widest text-center">
+                            <div className="bg-black/80 backdrop-blur-md p-2 sm:p-4 rounded-2xl sm:rounded-3xl border border-white/10 space-y-1.5 sm:space-y-3 w-28 sm:w-40 shrink-0">
+                              <p className="text-[7px] sm:text-[8px] font-black text-emerald-400 uppercase tracking-widest text-center">
                                 Illumination
                               </p>
                               <input
@@ -3176,9 +3176,9 @@ export default function VirtualLab({
 
                         {microscopeSlide !== "none" && (
                           <motion.div
-                            initial={{ opacity: 0, x: 20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            className="absolute top-10 right-6 w-72 p-6 bg-slate-950/90 border border-emerald-500/30 rounded-[2.5rem] space-y-5 shadow-[0_0_50px_rgba(16,185,129,0.15)] backdrop-blur-2xl z-50"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="w-full lg:w-72 p-6 bg-slate-950/90 border border-emerald-500/30 rounded-[2.5rem] space-y-5 shadow-[0_0_50px_rgba(16,185,129,0.15)] backdrop-blur-2xl z-50 lg:absolute lg:top-10 lg:-right-36 xl:-right-52"
                           >
                             <div className="flex items-center justify-between">
                               <div className="space-y-1">

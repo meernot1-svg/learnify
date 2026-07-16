@@ -62,7 +62,7 @@ export default function Sidebar() {
            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
               <GraduationCap size={24} />
            </div>
-           <span className="tracking-tighter">Learnify</span>
+           <span className="tracking-tighter">Edupulse</span>
         </div>
 
         <nav className="space-y-1.5">
@@ -124,6 +124,11 @@ export default function Sidebar() {
               <RefreshCcw size={12} />
               Switch Identity
             </button>
+            <div className="mt-3 text-center">
+              <span className="text-[10px] font-black uppercase tracking-[0.15em] text-muted-foreground/30 font-sans">
+                Created by <span className="text-primary italic font-black">Safiullah</span>
+              </span>
+            </div>
           </div>
         )}
       </div>

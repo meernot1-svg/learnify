@@ -28,7 +28,7 @@ export default function Header() {
         <div className="flex items-center gap-4">
            <Link to="/" className="flex items-center gap-3 font-black text-2xl tracking-tighter text-primary italic uppercase group">
               <Logo className="w-10 h-10 group-hover:rotate-12 transition-transform duration-300 shadow-xl shadow-primary/20" />
-              <span className="hidden sm:block">Learnify</span>
+              <span className="hidden sm:block">Edupulse</span>
            </Link>
         </div>
 

@@ -101,7 +101,7 @@ export default function PeriodicTable({ onAddElement }: { onAddElement?: (elemen
 
   return (
     <div className="w-full h-full flex flex-col gap-6">
-      <div className="flex items-end justify-between px-2">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 px-2">
          <div>
             <h2 className="text-4xl font-black italic tracking-tighter text-primary leading-none">Inter_Table</h2>
             <p className="text-muted-foreground text-[10px] uppercase tracking-[0.4em] font-black opacity-40 mt-2">Atomic Data Engine v1.0</p>
@@ -156,7 +156,7 @@ export default function PeriodicTable({ onAddElement }: { onAddElement?: (elemen
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="absolute inset-0 bg-background/60 backdrop-blur-md flex items-center justify-center p-4 sm:p-12 z-50 rounded-2xl sm:rounded-[3rem]"
+                  className="fixed inset-0 bg-background/60 backdrop-blur-md flex items-center justify-center p-4 sm:p-12 z-[350]"
                 >
                    <motion.div 
                      initial={{ scale: 0.9, y: 20 }}

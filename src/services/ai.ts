@@ -61,8 +61,8 @@ async function callOpenRouter(messages: any[], jsonMode = false, maxTokens = 200
     headers: {
       "Authorization": `Bearer ${apiKey}`,
       "Content-Type": "application/json",
-      "HTTP-Referer": typeof window !== "undefined" ? window.location.origin : "https://learnify-edu.web.app",
-      "X-Title": "Learnify"
+      "HTTP-Referer": typeof window !== "undefined" ? window.location.origin : "https://edupulse-edu.web.app",
+      "X-Title": "Edupulse"
     },
     body: JSON.stringify({
       model: "google/gemini-2.5-flash",
@@ -130,7 +130,7 @@ export const aiService = {
       const messages = [
         {
           role: "system",
-          content: "You are EduAI, a friendly and helpful teaching assistant for the Learnify platform. You help students with subjects like Computer Science, Physics, Chemistry, and Biology. Be concise, clear, and encouraging."
+          content: "You are EduAI, a friendly and helpful teaching assistant for the Edupulse platform. You help students with subjects like Computer Science, Physics, Chemistry, and Biology. Be concise, clear, and encouraging."
         },
         ...history.map(h => ({
           role: h.role === "model" ? "assistant" : "user",

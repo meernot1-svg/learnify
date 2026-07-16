@@ -92,7 +92,7 @@ export default function Login() {
               <Logo className="w-16 h-16" />
             </motion.div>
             <h1 className="text-4xl font-black mb-3 tracking-tighter uppercase">ACCESS CHANNEL</h1>
-            <p className="text-muted-foreground font-medium">Verify your identity to engage the Learnify network.</p>
+            <p className="text-muted-foreground font-medium">Verify your identity to engage the Edupulse network.</p>
           </div>
 
           <motion.div

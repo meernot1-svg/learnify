@@ -6,10 +6,10 @@ import firebaseConfig from '../../firebase-applet-config.json';
 
 const app = initializeApp(firebaseConfig);
 
-// EXPLICITLY use memoryLocalCache and auto-detected long-polling to prevent persistent hangs in the preview environment
+// EXPLICITLY use memoryLocalCache and forced long-polling to prevent persistent hangs in the preview environment
 export const db = initializeFirestore(app, {
   localCache: memoryLocalCache(),
-  experimentalAutoDetectLongPolling: true
+  experimentalForceLongPolling: true
 }, firebaseConfig.firestoreDatabaseId);
 
 export const auth = getAuth(app);

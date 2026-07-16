@@ -1,13 +1,11 @@
 {
-  "name": "Learnify",
+  "name": "Edupulse",
   "description": "Smart Virtual Labs & AI Learning Platform",
   "requestFramePermissions": [
     "camera",
     "microphone"
   ],
   "majorCapabilities": [
-    "AI-powered learning",
-    "Virtual labs",
-    "Peer-to-peer mentoring"
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
   ]
 }

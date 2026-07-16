@@ -161,7 +161,7 @@ export default function MobileNavigation() {
                   <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
                     <GraduationCap size={18} />
                   </div>
-                  <span className="tracking-tighter">Learnify Menu</span>
+                  <span className="tracking-tighter">Edupulse Menu</span>
                 </div>
                 <button
                   onClick={() => setIsDrawerOpen(false)}
@@ -275,11 +275,16 @@ export default function MobileNavigation() {
               <div className="p-6 border-t border-border bg-muted/10">
                 <button
                   onClick={handleLogout}
-                  className="flex items-center justify-center gap-2 w-full py-4 bg-red-500/10 hover:bg-red-500 border border-red-500/20 text-red-500 hover:text-white font-bold text-sm rounded-2xl transition-all active:scale-[0.98]"
+                  className="flex items-center justify-center gap-2 w-full py-4 bg-red-500/10 hover:bg-red-500 border border-red-500/20 text-red-500 hover:text-white font-bold text-sm rounded-2xl transition-all active:scale-[0.98] mb-3"
                 >
                   <LogOut size={16} />
                   <span>Logout Protocol</span>
                 </button>
+                <div className="text-center">
+                  <span className="text-[10px] font-black uppercase tracking-[0.15em] text-muted-foreground/30 font-sans">
+                    Created by <span className="text-primary italic font-black">Safiullah</span>
+                  </span>
+                </div>
               </div>
             </motion.div>
           </>

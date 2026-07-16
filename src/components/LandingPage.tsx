@@ -46,7 +46,7 @@ export default function LandingPage() {
             <div className="relative">
               <img 
                 src="https://lh3.googleusercontent.com/d/1mjlHJVtQeSVVmtFMkFwLLCs_ZRMfaOrf"
-                alt="Learnify Mascot"
+                alt="Edupulse Mascot"
                 className="w-[600px] md:w-[1000px] h-auto drop-shadow-[0_40px_80px_rgba(244,180,0,0.5)] brightness-110"
                 referrerPolicy="no-referrer"
               />
@@ -67,7 +67,7 @@ export default function LandingPage() {
               <span className="text-[#f4b400]">Potential</span>
             </h1>
             <h2 className="text-[35px] sm:text-[55px] md:text-[90px] leading-none text-foreground font-[800] m-0 tracking-tighter mb-10 opacity-90">
-              with Learnify
+              with Edupulse
             </h2>
             
             <motion.p 
@@ -176,15 +176,20 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
           <div className="flex items-center gap-3 font-black text-xl sm:text-2xl tracking-tighter uppercase italic">
             <Logo className="w-10 h-10" />
-            Learnify
+            Edupulse
           </div>
           <div className="flex flex-wrap justify-center gap-6 sm:gap-8 text-xs font-bold uppercase tracking-widest opacity-60">
             <a href="#" className="hover:text-primary transition-colors">Privacy</a>
             <a href="#" className="hover:text-primary transition-colors">Neural Network</a>
             <a href="#" className="hover:text-primary transition-colors">System Protocols</a>
           </div>
-          <div className="text-xs font-medium opacity-40">
-            © 2024 LEARNIFY CORE SYSTEMS.
+          <div className="flex flex-col items-center md:items-end gap-1.5">
+            <div className="text-xs font-medium opacity-40">
+              © 2024 EDUPULSE CORE SYSTEMS.
+            </div>
+            <div className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/50">
+              Created by <span className="text-primary italic font-extrabold">Safiullah</span>
+            </div>
           </div>
         </div>
       </footer>

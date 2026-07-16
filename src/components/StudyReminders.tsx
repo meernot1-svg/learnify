@@ -120,26 +120,26 @@ export default function StudyReminders({ onClose }: StudyRemindersProps) {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               className={cn(
-                "p-6 border-4 border-border rounded-[2.5rem] bg-card shadow-xl flex items-center justify-between group hover:border-primary transition-all",
+                "p-4 sm:p-6 border-2 sm:border-4 border-border rounded-[2rem] sm:rounded-[2.5rem] bg-card shadow-xl flex flex-col sm:flex-row gap-4 sm:items-center justify-between group hover:border-primary transition-all",
                 reminder.isNotified && "opacity-50 grayscale-[0.5]"
               )}
             >
-              <div className="flex items-center gap-6">
+              <div className="flex items-center gap-4 sm:gap-6">
                 <div className={cn(
-                  "w-16 h-16 rounded-[1.5rem] flex items-center justify-center shadow-inner",
+                  "w-12 h-12 sm:w-16 sm:h-16 rounded-[1.2rem] sm:rounded-[1.5rem] flex items-center justify-center shadow-inner shrink-0",
                   reminder.subject === 'computer' ? 'bg-blue-500/10 text-blue-500' :
                   reminder.subject === 'physics' ? 'bg-purple-500/10 text-purple-500' :
                   reminder.subject === 'biology' ? 'bg-emerald-500/10 text-emerald-500' :
                   'bg-red-500/10 text-red-500'
                 )}>
-                  <BookOpen size={28} strokeWidth={3} />
+                  <BookOpen className="w-6 h-6 sm:w-7 sm:h-7" strokeWidth={3} />
                 </div>
                 <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <p className="text-lg font-black italic uppercase tracking-tighter leading-none">{reminder.topic}</p>
+                  <div className="flex items-center gap-2 mb-1 flex-wrap">
+                    <p className="text-base sm:text-lg font-black italic uppercase tracking-tighter leading-none">{reminder.topic}</p>
                     {reminder.isNotified && <CheckCircle2 size={16} className="text-emerald-500" />}
                   </div>
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
                     <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground opacity-60">{reminder.subject}</span>
                     <div className="w-1 h-1 rounded-full bg-border" />
                     <span className="text-[10px] font-black uppercase tracking-widest text-primary">
@@ -150,9 +150,9 @@ export default function StudyReminders({ onClose }: StudyRemindersProps) {
               </div>
               <button 
                 onClick={() => handleDelete(reminder.id)}
-                className="p-4 rounded-xl bg-muted/50 text-muted-foreground hover:bg-red-500 hover:text-white transition-all opacity-0 group-hover:opacity-100"
+                className="p-3 sm:p-4 rounded-xl bg-muted/50 text-muted-foreground hover:bg-red-500 hover:text-white transition-all opacity-100 sm:opacity-0 sm:group-hover:opacity-100 self-end sm:self-auto"
               >
-                <Trash2 size={20} />
+                <Trash2 size={18} />
               </button>
             </motion.div>
           ))

@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemap Location
-Sitemap: https://learnify-edu.web.app/sitemap.xml
+Sitemap: https://edupulse-edu.web.app/sitemap.xml

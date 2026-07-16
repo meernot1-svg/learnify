@@ -54,7 +54,7 @@ export default function AIChat() {
       {/* Top Navigation */}
       <div className="flex items-center justify-between px-4 sm:px-6 py-3 border-b border-border bg-card/50 backdrop-blur-md shrink-0">
         <div className="flex items-center gap-1 group cursor-pointer hover:bg-muted/50 p-2 rounded-xl transition-all">
-          <span className="font-bold text-base sm:text-lg tracking-tight">Learnify AI</span>
+          <span className="font-bold text-base sm:text-lg tracking-tight">Edupulse AI</span>
           <ChevronDown size={14} className="text-muted-foreground group-hover:text-foreground transition-all" />
         </div>
         <div className="flex items-center gap-2 sm:gap-4">
@@ -170,7 +170,7 @@ export default function AIChat() {
             ))}
           </div>
         </div>
-        <p className="text-center mt-4 text-[9px] font-bold text-muted-foreground/40 uppercase tracking-[0.2em] hidden sm:block">Learnify Intelligence 4.0 Pro</p>
+        <p className="text-center mt-4 text-[9px] font-bold text-muted-foreground/40 uppercase tracking-[0.2em] hidden sm:block">Edupulse Intelligence 4.0 Pro</p>
       </div>
     </div>
   );
