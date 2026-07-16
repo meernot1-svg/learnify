@@ -1,10 +1,10 @@
 {
-  "projectId": "gen-lang-client-0575953031",
-  "appId": "1:757894669657:web:ba5d66fcc35d8f5b629848",
-  "apiKey": "AIzaSyBR1_905D5JJflDw7hKnEBgBZd7vcHWhIU",
-  "authDomain": "gen-lang-client-0575953031.firebaseapp.com",
-  "firestoreDatabaseId": "ai-studio-686245d2-1ed9-41b0-a84b-d7a6de19dcf7",
-  "storageBucket": "gen-lang-client-0575953031.firebasestorage.app",
-  "messagingSenderId": "757894669657",
-  "measurementId": ""
+  "projectId": "edupulse-89fe3",
+  "appId": "1:239026650531:web:4109a1061f9f3ff0162e16",
+  "apiKey": "AIzaSyDZy6e_gPM94QfOZ348a-Gc9sZy7h7rcTc",
+  "authDomain": "edupulse-89fe3.firebaseapp.com",
+  "firestoreDatabaseId": "",
+  "storageBucket": "edupulse-89fe3.firebasestorage.app",
+  "messagingSenderId": "239026650531",
+  "measurementId": "G-E505Q4VVY3"
 }
