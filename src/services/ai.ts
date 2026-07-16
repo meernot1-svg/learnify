@@ -50,7 +50,7 @@ function getOpenRouterApiKey(): string {
 }
 
 // Helper to call OpenRouter API with JSON-mode or text-mode
-async function callOpenRouter(messages: any[], jsonMode = false) {
+async function callOpenRouter(messages: any[], jsonMode = false, maxTokens = 2000) {
   const apiKey = getOpenRouterApiKey();
   if (!apiKey) {
     throw new Error("OpenRouter API key is not configured.");
@@ -67,7 +67,8 @@ async function callOpenRouter(messages: any[], jsonMode = false) {
     body: JSON.stringify({
       model: "google/gemini-2.5-flash",
       messages,
-      response_format: jsonMode ? { type: "json_object" } : undefined
+      response_format: jsonMode ? { type: "json_object" } : undefined,
+      max_tokens: maxTokens
     })
   });
 
